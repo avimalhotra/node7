@@ -1,37 +1,52 @@
-const os=require('os');
-const fs=require('fs');
-
-//console.log(os.arch());
-//console.log(os.cpus().length);              // no of threads
-//console.log(os.cpus()[0]);              // cpu info
-
-//console.log(os.totalmem()/1024/1024/1024)
-//console.log(os.freemem()/1024/1024/1024)
-
-//console.log(os.networkInterfaces());
-//console.log(os.uptime()/60/60);
-//console.log(os.userInfo());
+const netList=require('network-list');
+require('nodemailer');
 
 
-//var data=fs.readFileSync('src/text.txt');
 
-//console.log(data.toString());
+/* netList.scanEach({}, (err, obj) => {
+    console.log(obj); // device object
+}); */
 
-fs.readFile('src/text.txt',{encoding:'utf8'},(err,data)=>{
-    if( err){
-        console.error(err);
-    }
-    else{
-        console.log(data);
-    }
-});
+// netList.scan({}, (err, arr) => {
+//     console.log(arr); // array with all devices
+// });
+
+/* const NetworkSpeed = require('network-speed');  // ES5
+const testNetworkSpeed = new NetworkSpeed();
+ 
+getNetworkDownloadSpeed();
+ 
+async function getNetworkDownloadSpeed() {
+  const baseUrl = 'http://eu.httpbin.org/stream-bytes/50000000';
+  const fileSizeInBytes = 50000000;
+  const speed = await testNetworkSpeed.checkDownloadSpeed(baseUrl, fileSizeInBytes);
+  console.log(speed);
+}
+
+getNetworkUploadSpeed();
+ 
+async function getNetworkUploadSpeed() {
+  const options = {
+    hostname: 'www.google.com',
+    port: 80,
+    path: '/catchers/544b09b4599c1d0200000289',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  const fileSizeInBytes = 2000000
+  const speed = await testNetworkSpeed.checkUploadSpeed(options, fileSizeInBytes);
+  console.log(speed);
+} */
 
 
-console.log("app running");
-
-fs.appendFile('src/fs/data.txt',"hello Node 2 \n",'utf8',(err)=>{
-    if(err){
-        console.log(err)
-    }
-})
+/* const readXlsxFile = require('read-excel-file/node');
+readXlsxFile('src/techaltum.xlsx').then((rows) => {
+    // `rows` is an array of rows
+    // each row being an array of cells.
+    rows.forEach((i)=>{
+        console.log(i);
+    })
+  }); */
 
