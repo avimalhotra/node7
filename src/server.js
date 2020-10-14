@@ -1,52 +1,51 @@
-const netList=require('network-list');
-require('nodemailer');
+const path=require('path');
+const events=require('events').EventEmitter;
+let emitter=new events();
+module.exports=emitter;
+
+emitter.once("log",(name)=>{
+  console.log(`${name} user login`);
+});
+emitter.once("log",(name)=>{
+  console.log(`${name} is available`);
+});
+
+//emitter.emit('login','avi');
+
+require('./login');
+require('./account');
+
+emitter.emit('login',"10 AM");
+emitter.emit('account');
+
+
+/* emitter.on("done",(x)=>{
+  console.log(`done`);
+  x.handled=true;
+})
+
+emitter.on("done",(x)=>{
+  if(x.handled){
+      console.log(`already done`);
+  }
+});
+
+emitter.emit('done',{handled:false}); */
 
 
 
-/* netList.scanEach({}, (err, obj) => {
-    console.log(obj); // device object
-}); */
-
-// netList.scan({}, (err, arr) => {
-//     console.log(arr); // array with all devices
-// });
-
-/* const NetworkSpeed = require('network-speed');  // ES5
-const testNetworkSpeed = new NetworkSpeed();
- 
-getNetworkDownloadSpeed();
- 
-async function getNetworkDownloadSpeed() {
-  const baseUrl = 'http://eu.httpbin.org/stream-bytes/50000000';
-  const fileSizeInBytes = 50000000;
-  const speed = await testNetworkSpeed.checkDownloadSpeed(baseUrl, fileSizeInBytes);
-  console.log(speed);
-}
-
-getNetworkUploadSpeed();
- 
-async function getNetworkUploadSpeed() {
-  const options = {
-    hostname: 'www.google.com',
-    port: 80,
-    path: '/catchers/544b09b4599c1d0200000289',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-  const fileSizeInBytes = 2000000
-  const speed = await testNetworkSpeed.checkUploadSpeed(options, fileSizeInBytes);
-  console.log(speed);
-} */
+//emitter.emit('login','isha');
 
 
-/* const readXlsxFile = require('read-excel-file/node');
-readXlsxFile('src/techaltum.xlsx').then((rows) => {
-    // `rows` is an array of rows
-    // each row being an array of cells.
-    rows.forEach((i)=>{
-        console.log(i);
-    })
-  }); */
 
+//console.log(path.normalize('src/media/../../'))
+//console.log(path.basename('./src/pic.jpg'))
+//console.log(path.basename('./src/pic.jpg',".jpg"))
+//console.log(path.dirname('./src/views/'));
+//console.log(path.extname('./src/views/app.html'));
+//console.log(path.resolve('./src/modules/'));
+//console.log(path.resolve('src/','views'));
+//console.log(path.join('./src/','views'));
+
+
+    
