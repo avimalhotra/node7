@@ -16,6 +16,7 @@
             <a href="/login">Login</a>
         </nav>
         <img src="img/1.jpg" alt="" width="100">
+        <h2>Get</h2>
         <form action="/formdata" method="GET">
             <label>Name: <input autofocus name="username" type="text" required></label>
             <label>Age: <input type="number" min="1" max="99" required name="age"></label>
@@ -24,8 +25,10 @@
              <label>Female <input type="radio" name="gender" value="f"></label>
             <button type="submit">Submit</button>
         </form>
+        <h2>Post</h2>
         <form action="/formdata" method="POST">
-        <input type="text" required name="name">
+            <label>Userid: <input type="text" required name="name"></label>
+            <label>Password: <input type="password" required name="pass"></label>
         <button>Post</button>
         </form>
     </div>  
