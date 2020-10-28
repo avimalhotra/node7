@@ -6,8 +6,22 @@ let app=express();
 let router=express.Router();
 const bodyParser=require('body-parser');
 const cookieParser=require('cookie-parser');
-app.use(bodyParser());
+const session=require('express-session');
+const parseurl=require('parseurl');
+
+//app.use(bodyParser());
+app.use(bodyParser.text());
+
 app.use(cookieParser());
+app.set('trust proxy', 1); 
+app.use(session({
+  secret:"session",
+  resave:false,
+  saveUninitialized:true,
+  cookie:{secure:false}
+  //cookie:{maxAge:5000}
+}))
+
 
 let admin=require('./routes/admin');
 let user=require('./routes/user');
@@ -16,12 +30,27 @@ let user=require('./routes/user');
 
 app.use((req,res,next)=>{
   //console.log(`App started at ${Date.now()}`);
+  req.session.pageid=222;
   next();
 });
+// for session
+app.use( (req, res, next)=> {
+  if (!req.session.views) {
+    req.session.views = {}
+  }
+
+  // get the url pathname
+  var pathname = parseurl(req).pathname
+
+  // count the views
+  req.session.views[pathname] = (req.session.views[pathname] || 0) + 1
+
+  next()
+})
 
 
-app.use('/admin',admin);
-app.use('/user',user);
+//app.use('/admin',admin);
+//app.use('/user',user);
 
 /* app.use((req,res)=>{
   res.status(200);
@@ -31,11 +60,25 @@ app.use('/user',user);
 
 app.get('/',(req,res)=>{
   res.setHeader('Content-Type','text/html');
-  res.status(200).send(req.cookies);
+  res.status(200).send(`Session Id : ${req.sessionID}, session views ${req.session.views['/']}, ${req.session.pageid}`);
   //res.cookie('city', 'del', {signed: true})
-  //res.status(200).send(req.signedCookies);
+});
+// REST API
+var data=["sun","mon","tues","wed","thurs","fri","sat"];
+app.get("/api",(req,res)=>{
+  var data1=req.body;
+  console.log(data1)
+  res.header('Access-Control-Allow-Origin',"*");
+  //return res.status(200).send(data);
+  return res.status(200).send(data1);
+
 });
 
+
+app.get('/logout',(req,res)=>{
+  res.status(200).send("session destroyed");
+  req.session.destroy();
+})
 
 
 
