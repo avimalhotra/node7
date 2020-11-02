@@ -9,21 +9,19 @@
     <h1>AJAX API</h1>
     <h2></h2>
     <img class="loader" src="ajax/loader.gif" alt="" hidden="">
-    <input type="number" maxlength="1">
+    <input type="number" min="1" max="7" >
     <button>AJAX API</button>
     <div class="data"></div>
 <script>
     "use strict"
-
     
-    
-
+document.querySelector('input').addEventListener("keyup",function(){
     var ajax=new XMLHttpRequest();  // xhr
       
     //ajax.open("get","https://api.github.com/users/avimalhotra");
-    ajax.open("get","http://127.0.0.1:3000/api");
+    ajax.open("post","http://127.0.0.1:3000/api");
     //ajax.send("index:"+ this.value);
-    ajax.send();
+    ajax.send('name:'+ this.value);
     
     ajax.onreadystatechange=function(){
    
@@ -38,6 +36,7 @@
          
         var t=this.response;       // string 
         
+        t=JSON.parse(t);
        document.querySelector(".data").innerHTML+="<p>"+ t+"</p>";
     
         
@@ -51,7 +50,7 @@
     
     }
     
-    
+})    
   
     
     
