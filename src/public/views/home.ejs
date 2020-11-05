@@ -9,12 +9,21 @@
 </head>
 <body>
     <div class="container">
-        <h1>Hello EJS <%= name %></h1>
-        
-        <% if (user) { %>
-            <p><%= user.name %></h2>
-            <p><%= user.id %></h2>
-        <% } %> 
+        <%- include('header'); %>
+        <main>
+            <% if (user) { %>
+                <p><%= user.name %></h2>
+                <p><%= user.id %></h2>
+            <% } %> 
+
+            <p><%= month %></p>
+            <ol>
+                <% month.forEach((name)=>{ %>
+                    <li><%= name %></li>
+                <% }); %>
+            </ol>
+        </main>
+        <%- include('footer'); %>
     </div>
 </body>
 </html>

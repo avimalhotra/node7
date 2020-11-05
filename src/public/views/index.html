@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nunjucks</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        {% include "header.html" %}
+        {% include "nav.html" %}
+        <main>
+            <p>{{ name}}</p>
+             <p>User is {{user.name | title}} and id is {{ user.id}}</p>
+             <ol>
+                {% for i in month %}   
+                     <li>{{ i }}</li>
+                {% endfor %}    
+            </ol>
+            <br>
+            <ol>
+                {% for i,j in user %}   
+                     <li>{{ i }} &rarr; {{j}}</li>
+                {% endfor %}    
+            </ol>
+            {% if name %}
+            {{name}}
+            {% else %}
+            name not available         
+        {% endif %}
+        </main>
+        {% include "footer.html" %}
+    </div>
+</body>
+</html>
